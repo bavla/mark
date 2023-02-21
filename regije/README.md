@@ -85,13 +85,14 @@ Lahko pa iz novega `SIobc` dobimo seznam imen občin za vozlišča v Pajkovi dat
 Morda bo potrebno namestiti paket `spdep`.
 
 ```
-> sp2Pajek <- function(sp,file="neighbors.net",name=0,queen=TRUE){
+> sp2Pajek <- function(sp,file="neighbors.net",name=0,queen=TRUE,BOM=TRUE){
 +   library(spdep)
 +   nbs <- poly2nb(sp,queen=queen)
 +   n <- length(nbs); L <- card(nbs)
 +   xy <- coordinates(sp)
 +   IDs <- as.character(if(name>0) sp[[name]] else 1:n)
 +   net <- file(file,"w")
++   if(BOM) writeChar("\ufeff",net,eos=NULL) 
 +   cat("% sp2Pajek:",date(),"\n*vertices",n,"\n",file=net)
 +   for(i in 1:n) cat(i,' "',IDs[i],'" ',xy[i,1],' ',xy[i,2],' 0.5\n',sep='',file=net)
 +   cat("*edgeslist\n",file=net)
@@ -120,9 +121,9 @@ Formal class 'SpatialPolygonsDataFrame' [package "sp"] with 5 slots
  - attr(*, "data_types")= chr [1:6] "C" "N" "C" "N" ...
 > sp2Pajek(sids,file="SIsosed.net",name="NAZIV")
 ```
-Na datoteki `SIsosed.net` dobimo relacijo sosednosti slovenskih občin. Za pravilno delovanje znakov č, š, ž je z nekim znakovnim urejevalnikom (Emeditor, Textpad) preberemo in shranimo kot UTF-8 z BOM.
+Na datoteki `SIsosed.net` dobimo relacijo sosednosti slovenskih občin. 
 
-Drug problem je, da datoteka ne vsebuje vozlišča 145 (ima 212 vozlišč). Za povezovanje z drugimi datotekami je morda ustrezneje, če za ime/oznako vzamemo sestavo SIFRA-NAZIV.
+Problem je, da datoteka ne vsebuje vozlišča 145 (ima 212 vozlišč). Za povezovanje z drugimi datotekami je morda ustrezneje, če za ime/oznako vzamemo sestavo SIFRA-NAZIV.
 ```
 > sids@data$ime <- paste(sids@data$SIFRA,sids@data$NAZIV,sep=":")
 > str(sids@data)
@@ -137,5 +138,5 @@ Drug problem je, da datoteka ne vsebuje vozlišča 145 (ima 212 vozlišč). Za p
  - attr(*, "data_types")= chr [1:6] "C" "N" "C" "N" ...
 > sp2Pajek(sids,file="SIsosedskost.net",name="ime")
 ```
-Datoteki `SIsosedskost.net` sem dodal BOM in jo prebral v Pajka, kjer sem jo spravil v Pajkov koordinatni sistem in prezrcalil. Tako popravljeno datoteko sem shranil kot `SIsosediSN.net`.
+Datoteki `SIsosedskost.net` sem prebral v Pajka, kjer sem jo spravil v Pajkov koordinatni sistem in prezrcalil. Tako popravljeno datoteko sem shranil kot `SIsosediSN.net`.
 
