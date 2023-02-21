@@ -80,7 +80,7 @@ Lahko pa iz novega `SIobc` dobimo seznam imen občin za vozlišča v Pajkovi dat
 
 ```
 
-## Relecija sosednosti občin
+## Relacija sosednosti občin
 
 Morda bo potrebno namestiti paket `spdep`.
 
