@@ -29,7 +29,7 @@ Uporabimo recept iz  http://vladowiki.fmf.uni-lj.si/doku.php?id=notes:clu:counti
 ```
 Žal nam `str` pokaže, da vsebujejo podatki v datoteki shape le 192 občin - so zastareli.
 
-Sveži podatki
+## Sveži podatki
 
 Po kar nekaj googlanja sem našel čisto sveže podatke na 
 
