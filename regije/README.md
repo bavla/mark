@@ -80,3 +80,62 @@ Lahko pa iz novega `SIobc` dobimo seznam imen občin za vozlišča v Pajkovi dat
 
 ```
 
+## Relecija sosednosti občin
+
+Morda bo potrebno namestiti paket `spdep`.
+
+```
+> sp2Pajek <- function(sp,file="neighbors.net",name=0,queen=TRUE){
++   library(spdep)
++   nbs <- poly2nb(sp,queen=queen)
++   n <- length(nbs); L <- card(nbs)
++   xy <- coordinates(sp)
++   IDs <- as.character(if(name>0) sp[[name]] else 1:n)
++   net <- file(file,"w")
++   cat("% sp2Pajek:",date(),"\n*vertices",n,"\n",file=net)
++   for(i in 1:n) cat(i,' "',IDs[i],'" ',xy[i,1],' ',xy[i,2],' 0.5\n',sep='',file=net)
++   cat("*edgeslist\n",file=net)
++   for(i in 1:n) if(L[i]>0) cat(i,nbs[[i]],"\n",file=net)
++   close(net)
++ }
+> sids<-readShapePoly("slo/obcine/RPE_SLO_PROSTORSKE_ENOTE_OBCINE_poligon.shp")
+> str(sids,max.level=2)
+Formal class 'SpatialPolygonsDataFrame' [package "sp"] with 5 slots
+  ..@ data       :'data.frame': 212 obs. of  6 variables:
+  .. ..- attr(*, "data_types")= chr [1:6] "C" "N" "C" "N" ...
+  ..@ polygons   :List of 212
+  ..@ plotOrder  : int [1:212] 93 29 173 69 78 68 62 89 20 107 ...
+  ..@ bbox       : num [1:2, 1:2] 374837 31292 622606 193753
+  .. ..- attr(*, "dimnames")=List of 2
+  ..@ proj4string:Formal class 'CRS' [package "sp"] with 1 slot
+  ..$ comment: chr "FALSE"
+> str(sids@data)
+'data.frame':   212 obs. of  6 variables:
+ $ EID_OBCINA: Factor w/ 212 levels "110200000110265167",..: 145 146 25 30 36 62 67 72 96 102 ...
+ $ SIFRA     : int  143 146 25 30 37 89 100 107 129 136 ...
+ $ NAZIV     : Factor w/ 212 levels "Ajdovščina","Ankaran",..: 206 207 37 43 54 120 136 147 186 197 ...
+ $ OZNAKA_MES: int  0 0 0 0 0 0 0 0 0 0 ...
+ $ DATUM_SYS : Date, format: "2022-05-30" "2022-05-30" "2022-05-30" "2022-05-30" ...
+ $ NAZIV_DJ  : Factor w/ 0 levels: NA NA NA NA NA NA NA NA NA NA ...
+ - attr(*, "data_types")= chr [1:6] "C" "N" "C" "N" ...
+> sp2Pajek(sids,file="SIsosed.net",name="NAZIV")
+```
+Na datoteki `SIsosed.net` dobimo relacijo sosednosti slovenskih občin. Za pravilno delovanje znakov č, š, ž je z nekim znakovnim urejevalnikom (Emeditor, Textpad) preberemo in shranimo kot UTF-8 z BOM.
+
+Drug problem je, da datoteka ne vsebuje vozlišča 145 (ima 212 vozlišč). Za povezovanje z drugimi datotekami je morda ustrezneje, če za ime/oznako vzamemo sestavo SIFRA-NAZIV.
+```
+> sids@data$ime <- paste(sids@data$SIFRA,sids@data$NAZIV,sep=":")
+> str(sids@data)
+'data.frame':   212 obs. of  7 variables:
+ $ EID_OBCINA: Factor w/ 212 levels "110200000110265167",..: 145 146 25 30 36 62 67 72 96 102 ...
+ $ SIFRA     : int  143 146 25 30 37 89 100 107 129 136 ...
+ $ NAZIV     : Factor w/ 212 levels "Ajdovščina","Ankaran",..: 206 207 37 43 54 120 136 147 186 197 ...
+ $ OZNAKA_MES: int  0 0 0 0 0 0 0 0 0 0 ...
+ $ DATUM_SYS : Date, format: "2022-05-30" "2022-05-30" "2022-05-30" "2022-05-30" ...
+ $ NAZIV_DJ  : Factor w/ 0 levels: NA NA NA NA NA NA NA NA NA NA ...
+ $ ime       : chr  "143:Zavrč" "146:Železniki" "25:Dravograd" "30:Gornji Grad" ...
+ - attr(*, "data_types")= chr [1:6] "C" "N" "C" "N" ...
+> sp2Pajek(sids,file="SIsosedskost.net",name="ime")
+```
+Datoteki `SIsosedskost.net` sem dodal BOM in jo prebral v Pajka, kjer sem jo spravil v Pajkov koordinatni sistem in prezrcalil. Tako popravljeno datoteko sem shranil kot `SIsosediSN.net`.
+
