@@ -38,7 +38,7 @@ Portal Prostor > Zbirke podatkov > Prostorske enote, naslovi > Register prostors
 https://ipi.eprostor.gov.si/jgp/data :
 Prostorske enote: 19.02.2023 / shape
 
-Datoteko `Prostorske_enote_DRZAVA_1.zip` sem si namestil disk in razpakiral v podpodročje `slo`. To vsebuje več ZIPov. Datototeko `RPE_SLO_PROSTORSKE_ENOTE_obcine_20230219.zip` sem razpakiral v podpodpodročje `obcine`. Sedaj sem pripravljen za risanje
+Datoteko `Prostorske_enote_DRZAVA_1.zip` sem si namestil na disk in razpakiral v podpodročje `slo`. To vsebuje več ZIPov. Datototeko `RPE_SLO_PROSTORSKE_ENOTE_obcine_20230219.zip` sem razpakiral v podpodpodročje `obcine`. Sedaj sem pripravljen za risanje
 ```
 > SIobc <- readShapeSpatial("slo/obcine/RPE_SLO_PROSTORSKE_ENOTE_OBCINE_poligon.shp")
 > str(SIobc,max.level=3)
