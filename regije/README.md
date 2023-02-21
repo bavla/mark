@@ -11,7 +11,7 @@
 - https://pxweb.stat.si/SiStatData/pxweb/sl/Data/Data/05C4003S.px/
 
 Na http://www.diva-gis.org/gdata poberemo datoteko shape `SVN_adm.zip` za Slovenijo in jo razpakiramo v podpodročje `svn`.
-Uporabimo recept iz  http://vladowiki.fmf.uni-lj.si/doku.php?id=notes:clu:counties:bk
+Uporabimo recept iz  http://vladowiki.fmf.uni-lj.si/doku.php?id=notes:clu:counties:bk . Morda bo potrebno namestiti paket `maptools`.
 
 ```
 > setwd("C:/Users/vlado/DL/shape")
@@ -44,9 +44,9 @@ Datoteko `Prostorske_enote_DRZAVA_1.zip` sem si namestil disk in razpakiral v po
 > str(SIobc,max.level=3)
 > plot(SIobc,col="yellow",bg="grey97",border="grey",lwd=0.001,asp=1.3)
 ```
-Tokrat nam `str` pokaže 212 občin - zemljevidski podatki so sveži. Žal zgleda, da novi SIobc ni usklajen s starima SIsta in SIout.
+Tokrat nam `str` pokaže 212 občin - zemljevidski podatki so sveži. Žal zgleda, da novi `SIobc` ni usklajen s starima `SIsta` in `SIout`.
 
-Lahko pa iz SIobc dobimo seznam imen občin za vozlišča v Pajkovi datoteki
+Lahko pa iz novega `SIobc` dobimo seznam imen občin za vozlišča v Pajkovi datoteki
 
 ```
 > head(SIobc@data[,c("SIFRA","NAZIV")])
