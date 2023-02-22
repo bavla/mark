@@ -25,7 +25,6 @@ Uporabimo recept iz  http://vladowiki.fmf.uni-lj.si/doku.php?id=notes:clu:counti
 > plot(SIobc,col="yellow",bg="grey97",border="grey",lwd=0.001,asp=1.3)
 > plot(SIsta,lwd=0.005,border="blue",asp=1.3,add=TRUE)
 > plot(SIout,lwd=0.008,border="black",asp=1.3,add=TRUE)
-
 ```
 Žal nam `str` pokaže, da vsebujejo podatki v datoteki shape le 192 občin - so zastareli.
 
@@ -35,16 +34,17 @@ Po kar nekaj googlanja sem našel čisto sveže podatke na
 
 Geodetska uprava Republike Slovenije,
 Portal Prostor > Zbirke podatkov > Prostorske enote, naslovi > Register prostorskih enot:
-https://ipi.eprostor.gov.si/jgp/data :
-Prostorske enote: 19.02.2023 / shape
+https://ipi.eprostor.gov.si/jgp/data : Prostorske enote: 19.02.2023 / shape
 
 Datoteko `Prostorske_enote_DRZAVA_1.zip` sem si namestil na disk in razpakiral v podpodročje `slo`. To vsebuje več ZIPov. Datototeko `RPE_SLO_PROSTORSKE_ENOTE_obcine_20230219.zip` sem razpakiral v podpodpodročje `obcine`. Sedaj sem pripravljen za risanje
 ```
 > SIobc <- readShapeSpatial("slo/obcine/RPE_SLO_PROSTORSKE_ENOTE_OBCINE_poligon.shp")
 > str(SIobc,max.level=3)
+> SIsta <- readShapeSpatial("slo/obcine/RPE_SLO_PROSTORSKE_ENOTE_STATISTICNE_REGIJE_poligon.shp")
 > plot(SIobc,col="yellow",bg="grey97",border="grey",lwd=0.001,asp=1.3)
+> plot(SIsta,lwd=0.005,border="red",asp=1.3,add=TRUE)
 ```
-Tokrat nam `str` pokaže 212 občin - zemljevidski podatki so sveži. Žal zgleda, da novi `SIobc` ni usklajen s starima `SIsta` in `SIout`.
+Tokrat nam `str` pokaže 212 občin - zemljevidski podatki so sveži. Žal zgleda, da novi `SIobc` ni usklajen s starima `SIsta` in `SIout`. So pa podatki o statističnih regijah v ZIPu `RPE_SLO_PROSTORSKE_ENOTE_statisticne_regije_20230219.zip`, ki ga prav tako razpakiramo v podpodpodročje `obcine`.
 
 Lahko pa iz novega `SIobc` dobimo seznam imen občin za vozlišča v Pajkovi datoteki
 
@@ -76,14 +76,15 @@ Lahko pa iz novega `SIobc` dobimo seznam imen občin za vozlišča v Pajkovi dat
 145   211                       Šentrupert
 146   212                            Mirna
 63    213                          Ankaran
-> 
-
 ```
 
 ## Relacija sosednosti občin
 
+Relacija sosednosti občin lahko pridobimo iz opisa zemljevida v datoteki shape.  http://vladowiki.fmf.uni-lj.si/doku.php?id=notes:net:shape
+
 Morda bo potrebno namestiti paket `spdep`.
 
+Pretvorbo opisa zemljevida v relacijo sosednosti opravi funkcija
 ```
 > sp2Pajek <- function(sp,file="neighbors.net",name=0,queen=TRUE,BOM=TRUE){
 +   library(spdep)
@@ -99,6 +100,11 @@ Morda bo potrebno namestiti paket `spdep`.
 +   for(i in 1:n) if(L[i]>0) cat(i,nbs[[i]],"\n",file=net)
 +   close(net)
 + }
+```
+ki sem jo vključil v knjižnico `Pajek.R`.
+
+```
+> source("https://raw.githubusercontent.com/bavla/Rnet/master/R/Pajek.R")
 > sids<-readShapePoly("slo/obcine/RPE_SLO_PROSTORSKE_ENOTE_OBCINE_poligon.shp")
 > str(sids,max.level=2)
 Formal class 'SpatialPolygonsDataFrame' [package "sp"] with 5 slots
