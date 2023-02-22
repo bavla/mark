@@ -21,7 +21,6 @@ Uporabimo recept iz  http://vladowiki.fmf.uni-lj.si/doku.php?id=notes:clu:counti
 > SIsta <- readShapeSpatial("svn/SVN_adm1.shp")
 > SIobc <- readShapeSpatial("svn/SVN_adm2.shp")
 > str(SIobc,max.level=3)
-> # plot(UScou,xlim=c(-124,-67),ylim=c(25,49),col=col[clu],bg="grey97",border="grey",lwd=0.001,asp=1.3)
 > plot(SIobc,col="yellow",bg="grey97",border="grey",lwd=0.001,asp=1.3)
 > plot(SIsta,lwd=0.005,border="blue",asp=1.3,add=TRUE)
 > plot(SIout,lwd=0.008,border="black",asp=1.3,add=TRUE)
@@ -40,6 +39,15 @@ Datoteko `Prostorske_enote_DRZAVA_1.zip` sem si namestil na disk in razpakiral v
 ```
 > SIobc <- readShapeSpatial("slo/obcine/RPE_SLO_PROSTORSKE_ENOTE_OBCINE_poligon.shp")
 > str(SIobc,max.level=3)
+> str(SIobc@data)
+'data.frame':   212 obs. of  6 variables:
+ $ EID_OBCINA: Factor w/ 212 levels "110200000110265167",..: 145 146 25 30 36 62 67 72 96 102 ...
+ $ SIFRA     : int  143 146 25 30 37 89 100 107 129 136 ...
+ $ NAZIV     : Factor w/ 212 levels "Ajdovščina","Ankaran",..: 206 207 37 43 54 120 136 147 186 197 ...
+ $ OZNAKA_MES: int  0 0 0 0 0 0 0 0 0 0 ...
+ $ DATUM_SYS : Date, format: "2022-05-30" "2022-05-30" "2022-05-30" "2022-05-30" ...
+ $ NAZIV_DJ  : Factor w/ 0 levels: NA NA NA NA NA NA NA NA NA NA ...
+ - attr(*, "data_types")= chr [1:6] "C" "N" "C" "N" ...
 > SIsta <- readShapeSpatial("slo/obcine/RPE_SLO_PROSTORSKE_ENOTE_STATISTICNE_REGIJE_poligon.shp")
 > plot(SIobc,col="yellow",bg="grey97",border="grey",lwd=0.001,asp=1.3)
 > plot(SIsta,lwd=0.005,border="red",asp=1.3,add=TRUE)
