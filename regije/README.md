@@ -144,5 +144,5 @@ Problem je, da datoteka ne vsebuje vozlišča 145 (ima 212 vozlišč). Za povezo
  - attr(*, "data_types")= chr [1:6] "C" "N" "C" "N" ...
 > sp2Pajek(sids,file="SIsosedskost.net",name="ime")
 ```
-Datoteki `SIsosedskost.net` sem prebral v Pajka, kjer sem jo spravil v Pajkov koordinatni sistem in prezrcalil. Tako popravljeno datoteko sem shranil kot `SIsosediSN.net`.
+Datoteko `SIsosedskost.net` sem prebral v Pajka, kjer sem jo spravil v Pajkov koordinatni sistem in prezrcalil. Tako popravljeno datoteko sem shranil kot `SIsosediSN.net`.
 
