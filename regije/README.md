@@ -2,6 +2,7 @@
 
 ## Zemljevid
 
+- http://vladowiki.fmf.uni-lj.si/doku.php?id=notes:rmap
 - https://dataoko.wordpress.com/2013/12/22/zapiski-zemljevid-obcin-gis-itd-1/
 - https://www.stat.si/obcine/sl
 - https://www.eea.europa.eu/data-and-maps/data/eea-reference-grids-2/gis-files/slovenia-shapefile
