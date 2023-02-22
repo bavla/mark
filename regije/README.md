@@ -113,34 +113,14 @@ ki sem jo vključil v knjižnico `Pajek.R`.
 
 ```
 > source("https://raw.githubusercontent.com/bavla/Rnet/master/R/Pajek.R")
-> sids<-readShapePoly("slo/obcine/RPE_SLO_PROSTORSKE_ENOTE_OBCINE_poligon.shp")
-> str(sids,max.level=2)
-Formal class 'SpatialPolygonsDataFrame' [package "sp"] with 5 slots
-  ..@ data       :'data.frame': 212 obs. of  6 variables:
-  .. ..- attr(*, "data_types")= chr [1:6] "C" "N" "C" "N" ...
-  ..@ polygons   :List of 212
-  ..@ plotOrder  : int [1:212] 93 29 173 69 78 68 62 89 20 107 ...
-  ..@ bbox       : num [1:2, 1:2] 374837 31292 622606 193753
-  .. ..- attr(*, "dimnames")=List of 2
-  ..@ proj4string:Formal class 'CRS' [package "sp"] with 1 slot
-  ..$ comment: chr "FALSE"
-> str(sids@data)
-'data.frame':   212 obs. of  6 variables:
- $ EID_OBCINA: Factor w/ 212 levels "110200000110265167",..: 145 146 25 30 36 62 67 72 96 102 ...
- $ SIFRA     : int  143 146 25 30 37 89 100 107 129 136 ...
- $ NAZIV     : Factor w/ 212 levels "Ajdovščina","Ankaran",..: 206 207 37 43 54 120 136 147 186 197 ...
- $ OZNAKA_MES: int  0 0 0 0 0 0 0 0 0 0 ...
- $ DATUM_SYS : Date, format: "2022-05-30" "2022-05-30" "2022-05-30" "2022-05-30" ...
- $ NAZIV_DJ  : Factor w/ 0 levels: NA NA NA NA NA NA NA NA NA NA ...
- - attr(*, "data_types")= chr [1:6] "C" "N" "C" "N" ...
-> sp2Pajek(sids,file="SIsosed.net",name="NAZIV")
+> sp2Pajek(SIobc,file="SIsosed.net",name="NAZIV",queen=FALSE)
 ```
-Na datoteki `SIsosed.net` dobimo relacijo sosednosti slovenskih občin. 
+Na datoteki `SIsosed.net` dobimo relacijo sosednosti slovenskih občin. Parameter queen izbira med trdnjavsko (rook) sosednostjo - enoti sta sosednji, če imata skupno mejo - in kraljičniško (queen) sosednostjo - sosednje so tudi enote, ki se stikajo v isti točki.
 
 Problem je, da datoteka ne vsebuje vozlišča 145 (ima 212 vozlišč). Za povezovanje z drugimi datotekami je morda ustrezneje, če za ime/oznako vzamemo sestavo SIFRA-NAZIV.
 ```
-> sids@data$ime <- paste(sids@data$SIFRA,sids@data$NAZIV,sep=":")
-> str(sids@data)
+> SIobc@data$ime <- paste(sids@data$SIFRA,sids@data$NAZIV,sep=":")
+> str(SIobc@data)
 'data.frame':   212 obs. of  7 variables:
  $ EID_OBCINA: Factor w/ 212 levels "110200000110265167",..: 145 146 25 30 36 62 67 72 96 102 ...
  $ SIFRA     : int  143 146 25 30 37 89 100 107 129 136 ...
@@ -150,7 +130,7 @@ Problem je, da datoteka ne vsebuje vozlišča 145 (ima 212 vozlišč). Za povezo
  $ NAZIV_DJ  : Factor w/ 0 levels: NA NA NA NA NA NA NA NA NA NA ...
  $ ime       : chr  "143:Zavrč" "146:Železniki" "25:Dravograd" "30:Gornji Grad" ...
  - attr(*, "data_types")= chr [1:6] "C" "N" "C" "N" ...
-> sp2Pajek(sids,file="SIsosedskost.net",name="ime")
+> sp2Pajek(SIobc,file="SIsosedskost.net",name="ime",queen=FALSE)
 ```
 Datoteko `SIsosedskost.net` sem prebral v Pajka, kjer sem jo spravil v Pajkov koordinatni sistem in prezrcalil. Tako popravljeno datoteko sem shranil kot `SIsosediSN.net`.
 
