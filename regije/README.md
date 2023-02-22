@@ -80,7 +80,7 @@ Lahko pa iz novega `SIobc` dobimo seznam imen občin za vozlišča v Pajkovi dat
 
 ## Relacija sosednosti občin
 
-Relacija sosednosti občin lahko pridobimo iz opisa zemljevida v datoteki shape.  http://vladowiki.fmf.uni-lj.si/doku.php?id=notes:net:shape
+Relacijo sosednosti občin lahko pridobimo iz opisa zemljevida v datoteki shape.  http://vladowiki.fmf.uni-lj.si/doku.php?id=notes:net:shape
 
 Morda bo potrebno namestiti paket `spdep`.
 
