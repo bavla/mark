@@ -112,6 +112,11 @@ Lahko pa iz novega `SIobc` dobimo seznam imen občin za vozlišča v Pajkovi dat
 146   212                            Mirna
 63    213                          Ankaran
 ```
+Prikažimo še nove občine 
+```
+> nove <- ifelse(SIobc@data$SIFRA>192,"pink","lightskyblue1")
+> plot(SIobc,col=nove,bg="grey97",border="black",lwd=0.001,asp=1.3)
+```
 
 ## Relacija sosednosti občin
 
