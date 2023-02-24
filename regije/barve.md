@@ -52,7 +52,7 @@ Najprej sestavimo tabelo pravil prebarvanja. Pravilo [a,b,c] pravi: če tekoča 
 ```
 Pri pripravi tabele si lahko pomagamo s seznamom iz https://www.rapidtables.com/web/color/RGB_Color.html .
 
-Prebarvanje opravi funkcija (najbrž se jo da učinkoviteje sprogramirati)
+Prebarvanje opravi funkcija (najbrž se jo da učinkoviteje sprogramirati, če pravila razbijemo na skupine glede na niz a https://stringr.tidyverse.org/reference/str_replace.html)
 ```
 > reColor <- function(S,rule) {
 +   for(j in 1:length(S)){
