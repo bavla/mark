@@ -37,7 +37,7 @@ Sliko lahko prebarvaš tako, da v izbranem delu opisa vse pojavitve izbrane barv
 
 Za preizkušanje sem pripravil datoteko `barve.paj`. Pobarvamo jo s standardno paleto in izvozimo sliko kot `barve.svg`. Ogledamo si jo.
 
-Najprej sestavimo tabelo pravil prebarvanja. Pravilo [a,b,c] pravi: če tekoča vrstica datoteke vsebuje niz a, potem v njem zamenjaj pojavitve niza b z nizom c.
+Najprej sestavimo tabelo pravil prebarvanja. Pravilo [a,b,c] pravi: če tekoča vrstica datoteke vsebuje niz a, potem v njej zamenjaj pojavitve niza b z nizom c.
 ```
 > k <- 8
 > rule <- matrix("",nrow=k,ncol=3)
