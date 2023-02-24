@@ -17,7 +17,7 @@ Naslednja možnost je, če popravkov ni veliko, da barve zamenjaš v programu za
 
 ## Prebarvanje opisa slike v SVG
 
-Pajkov opis slike v SVG je znakovna datoteka. Barve so določene z RGB. Tako vozlišča kot povezave so pravzaprav liki. Pri vsakem liku lahko določimo barvo roba (stroke) in barvo notranjosti (fill). 
+Pajkov opis slike v SVG je znakovna datoteka. Barve so določene z RGB. Tako vozlišča kot povezave so pravzaprav liki. Pri vsakem liku lahko določimo barvo roba (`stroke`) in barvo notranjosti (`fill`). 
 
 vozlišča
 ```
@@ -35,7 +35,7 @@ Sliko lahko prebarvaš tako, da v izbranem delu opisa vse pojavitve izbrane barv
 
 ### Programsko prebarvanje
 
-Za preizkušanje sem pripravil datoteko barve.net. Pobarvamo jo s standardno paleto in izvozimo sliko kot barve.svg. Ogledamo si jo.
+Za preizkušanje sem pripravil datoteko `barve.paj`. Pobarvamo jo s standardno paleto in izvozimo sliko kot `barve.svg`. Ogledamo si jo.
 
 Najprej sestavimo tabelo pravil prebarvanja. Pravilo [a,b,c] pravi: če tekoča vrstica datoteke vsebuje niz a, potem v njem zamenjaj pojavitve niza b z nizom c.
 ```
