@@ -166,5 +166,5 @@ Problem je, da datoteka ne vsebuje vozlišča 145 (ima 212 vozlišč). Za povezo
 ```
 Datoteko `SIsosedskost.net` sem prebral v Pajka, kjer sem jo spravil v Pajkov koordinatni sistem in prezrcalil. Tako popravljeno datoteko sem shranil kot `SIsosediSN.net`.
 
-<img src="https://github.com/bavla/mark/blob/main/regije/barve.svg" width="600" />
-<img src="https://github.com/bavla/mark/blob/main/regije/novebarve.svg" width="600" />
+<img src="https://github.com/bavla/mark/blob/main/regije/barve.svg" width="500" />
+<img src="https://github.com/bavla/mark/blob/main/regije/novebarve.svg" width="500" />
