@@ -69,6 +69,9 @@ Sedaj še preberemo izvorno datoteko, jo prebarvamo in shranimo na novo datoteko
 ```
 > writeLines(reColor(readLines("barve.svg"),rule),"novebarve.svg")
 ```
+
+<img src="https://github.com/bavla/mark/blob/main/regije/barve.svg" width="400" /> <img src="https://github.com/bavla/mark/blob/main/regije/novebarve.svg" width="400" />
+
 Glej še http://vladowiki.fmf.uni-lj.si/doku.php?id=notes:rcolor .
 ```
 
