@@ -1,0 +1,34 @@
+<tr><td align=center>Touch the node or symbol to display its label.<br>
+Touch the legend item to display cluster members, and click the legend item to turn the cluster on/off.<br>
+Use the mouse position to select a location and the wheel to zoom in/out</tr><td>
+</table>
+
+<script>
+// by Sven Liivak (Oct 6, 2018)
+// https://stackoverflow.com/questions/52576376/how-to-zoom-in-on-a-complex-svg-structure
+const svgImage = document.getElementById("svgImage");
+const svgSize = {w:svgImage.clientWidth ,h:svgImage.clientHeight};
+var oldScale = 1;
+
+svgImage.onmousewheel = function(e) {
+    e.preventDefault();
+    
+    var svgW     = svgSize.w,
+        svgH     = svgSize.h,
+        mX       = e.offsetX,
+        mY       = e.offsetY,
+        delta    = (e.wheelDelta) ? -e.wheelDelta : e.detail,
+        newScale = oldScale + (oldScale*delta/1200); //1200: intensity
+
+    var vb      = svgImage.getAttribute('viewBox').split(" ");
+    var newW    = svgW * newScale,
+        newH    = svgH * newScale,
+        newX    = vb[0]*1 + (vb[2]*1 - newW) * (mX/svgW),
+        newY    = vb[1]*1 + (vb[3]*1 - newH) * (mY/svgH);
+
+    viewBox = { x:Math.round(newX), y:Math.round(newY), w:newW, h:newH };
+    svgImage.setAttribute('viewBox', `${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
+    oldScale = newScale;
+}
+</script>
+</html>
